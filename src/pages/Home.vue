@@ -1,134 +1,59 @@
 <template>
-  <div>
-    <b-row class="no-gutters">
-      <b-col lg="4" md="5" order-md="1" order="2" cols="12">
-        <div class="about-sidebar">
-          <h1 class="website-title">
-            <a href="/">
-              <b>Evan</b>
-              <span class="last-name">Welsh</span>
-            </a>
-          </h1>
-          <h3 class="website-subtitle">one line of code at a time</h3>
-          <bubble
-            header="email"
-            link="mailto:contact@evanwelsh.com"
-            content="contact@evanwelsh.com"
+  <div class="home">
+    <div class="content">
+      <h1 class="website-title">
+        <b>{{ 'Evan ' }}</b>
+        <span class="last-name">Welsh</span>
+      </h1>
+      <div class="social-links">
+        <p>
+          Full-Stack Developer @
+          <a
+            href="https://modernhealth.com"
+            class="job"
+            rel="noreferrer"
+            target="_blank"
           >
-            <mail-icon />
-          </bubble>
-          <bubble header="my hometown" content="Grand Forks, North Dakota">
-            <home-icon />
-          </bubble>
-          <bubble
-            link="https://github.com/ewlsh/"
-            header="github"
-            content="@ewlsh"
-          >
-            <github-icon />
-          </bubble>
-          <div>
-            <b-row class="social-links no-gutters">
-              <b-col cols="auto">
-                <bubble
-                  header="linkedin"
-                  link="https://www.linkedin.com/in/evan-welsh-291577141/"
-                >
-                  <linkedin-icon />
-                </bubble>
-              </b-col>
-              <b-col cols="auto">
-                <bubble
-                  header="instagram"
-                  link="https://www.instagram.com/ewlsh/"
-                >
-                  <instagram-icon />
-                </bubble>
-              </b-col>
-              <b-col cols="auto">
-                <bubble header="twitter" link="https://www.twitter.com/ewlsh/">
-                  <twitter-icon />
-                </bubble>
-              </b-col>
-            </b-row>
-          </div>
+            Modern Health
+          </a>
+        </p>
+        <p class="location">San Francisco Bay Area</p>
+
+        <div>
+          <b-row>
+            <b-col cols="auto">
+              <bubble header="email" link="mailto:contact@evanwelsh.com">
+                <mail-icon size="2x" />
+              </bubble>
+            </b-col>
+
+            <b-col cols="auto">
+              <bubble
+                header="linkedin"
+                link="https://www.linkedin.com/in/evan-welsh-291577141/"
+              >
+                <linkedin-icon size="2x" />
+              </bubble>
+            </b-col>
+
+            <b-col cols="auto">
+              <bubble link="https://github.com/ewlsh/" header="github">
+                <github-icon size="2x" />
+              </bubble>
+            </b-col>
+
+            <b-col cols="auto">
+              <bubble
+                header="gnome gitlab"
+                link="https://gitlab.gnome.org/ewlsh"
+              >
+                <GnomeLogo width="32" height="32" />
+              </bubble>
+            </b-col>
+          </b-row>
         </div>
-      </b-col>
-      <b-col lg="8" md="7" order-md="2" order="1" cols="12">
-        <portfolio-header />
-      </b-col>
-      <b-col class="content" cols="12" order="4">
-        <b-row v-if="projects" class="no-gutters">
-          <b-col>
-            <section class="projects">
-              <h4 class="header" id="projects">A Few Things I've Done</h4>
-              <b-row class="no-gutters">
-                <b-col
-                  v-for="project of projects"
-                  :key="project.name"
-                  sm="12"
-                  md="6"
-                  lg="4"
-                >
-                  <project-card
-                    @more-info-clicked="displayMoreInfoModal"
-                    :image-path="project.imagePath"
-                    :project="project"
-                  />
-                </b-col>
-              </b-row>
-            </section>
-          </b-col>
-        </b-row>
-        <b-row class="no-gutters justify-content-center" v-else>
-          <b-col cols="auto">
-            <b-spinner class="loading"></b-spinner>
-          </b-col>
-        </b-row>
-      </b-col>
-    </b-row>
-    <transition name="modal">
-      <b-modal
-        v-show="isShowing"
-        v-model="isShowing"
-        no-fade
-        size="lg"
-        centered
-        ref="moreInfoModal"
-        id="moreInfoModal"
-      >
-        <template v-if="modalProject">
-          <b-container>
-            <b-row>
-              <b-col>
-                <b-img
-                  v-if="modalProject.imagePath"
-                  class="modal-image"
-                  :src="modalProject.imagePath"
-                  rounded
-                />
-                <h3 class="modal-body-header">{{ modalProject.name }}</h3>
-                <p>{{ modalProject.description }}</p>
-              </b-col>
-            </b-row>
-          </b-container>
-          <div slot="modal-footer">
-            <b-button
-              v-if="modalProject.githubUrl"
-              :href="modalProject.githubUrl"
-              variant="default"
-              >GitHub</b-button
-            >
-            <b-button
-              v-if="modalProject.actionUrl"
-              :href="modalProject.actionUrl"
-              variant="primary"
-              >{{ modalProject.actionText || 'Install' }}</b-button
-            >
-          </div>
-        </template>
-      </b-modal>
-    </transition>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -149,6 +74,30 @@
 <style lang="scss" scoped>
 @import '../scss/variables';
 
+.home {
+  font-size: 1.25rem;
+  color: #fefefe;
+  background-color: #000;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  //justify-content: center;
+}
+
+.content {
+  margin-left: max(40px, 10%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.job {
+  color: $primary;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
 .projects {
   margin: 1rem;
 }
@@ -156,7 +105,7 @@
 .website-title {
   padding-top: 5%;
   font-weight: 700;
-  font-size: 4rem;
+  font-size: 5rem;
   color: #fefefe;
   a {
     color: #fefefe;
@@ -271,6 +220,8 @@ import {
   TwitterIcon
 } from 'vue-feather-icons';
 
+import GnomeLogo from '@/assets/GnomeLogo.svg?inline';
+
 @Component({
   components: {
     PortfolioHeader,
@@ -281,7 +232,8 @@ import {
     TwitterIcon,
     InstagramIcon,
     LinkedinIcon,
-    bubble: SocialMediaBubble
+    bubble: SocialMediaBubble,
+    GnomeLogo
   }
 })
 export default class Home extends Vue {

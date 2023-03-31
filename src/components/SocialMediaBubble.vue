@@ -1,12 +1,15 @@
 <template>
-  <a class="bubble bubble-link" :href="link" v-if="link" :aria-label="header">
-    <div class="content">
+  <div class="container">
+    <a
+      class="bubble bubble-link"
+      :href="link"
+      v-if="link"
+      :aria-label="header"
+      target="_blank"
+    >
       <slot></slot>
-    </div>
-    <p v-if="content" class="text">{{ content }}</p>
-  </a>
-  <div class="bubble" :aria-label="header" v-else>
-    <div class="content">
+    </a>
+    <div class="bubble" :aria-label="header" v-else>
       <slot></slot>
     </div>
     <p v-if="content" class="text">{{ content }}</p>
@@ -39,6 +42,11 @@ export default class SocialMediaBubble extends Vue {}
 </script>
 
 <style lang="scss">
+.container {
+  height: 36px;
+  padding: 0;
+}
+
 .bubble {
   display: flex;
   flex-direction: row;
@@ -46,20 +54,22 @@ export default class SocialMediaBubble extends Vue {}
   color: #fefefe;
   font-size: 1.2rem;
   line-height: 26px;
+  height: 36px;
+  width: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
 
-  &:hover,
-  &:focus,
-  &:active {
-    color: #fefefe;
-  }
-
-  &.bubble-link:hover {
-    color: #fefefe;
+  &.bubble-link:hover,
+  &.bubble-link:focus {
+    background-color: #fefefe;
+    color: #000;
+    border-radius: 50%;
     text-decoration: none;
   }
 
   .content {
-    margin: 0 3px;
+    margin: 3px;
   }
 
   .text {
