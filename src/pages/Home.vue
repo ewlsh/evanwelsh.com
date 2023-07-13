@@ -7,15 +7,14 @@
       </h1>
       <div class="social-links">
         <p>
-          Full-Stack Developer @
+          Full-Stack Developer @{{ ' ' }}
           <a
             href="https://modernhealth.com"
             class="job"
             rel="noreferrer"
             target="_blank"
+            >Modern Health</a
           >
-            Modern Health
-          </a>
         </p>
         <p class="location">San Francisco Bay Area</p>
 
@@ -96,6 +95,7 @@
   color: $primary;
   text-decoration: underline;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .projects {
